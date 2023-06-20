@@ -15,24 +15,15 @@ public class InputReader {
         System.out.print("숫자를 입력해주세요. : ");
         String inputNumberList = Console.readLine();
 
-        try {
-            checkValidInput(inputNumberList, GAME_NUMBER_DIGIT);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.toString());
-            return null;
-        }
+
+        checkValidInput(inputNumberList, GAME_NUMBER_DIGIT);
         return inputNumberList.chars().mapToObj(e -> e - '0').collect(Collectors.toList());
     }
 
     public int inputEndSignal() {
         System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         String inputNumber = Console.readLine();
-        try{
-                checkValidInput(inputNumber,END_INPUT_DIGIT);
-        }catch(IllegalArgumentException e){
-            System.out.println(e.toString());
-            return -1;
-        }
+        checkValidInput(inputNumber,END_INPUT_DIGIT);
         return Integer.parseInt(inputNumber);
     }
 
