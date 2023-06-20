@@ -10,10 +10,9 @@ public class NumberChecker {
         this.answerNum = answerNum;
     }
 
-    public void printResult(String resultWord){
-        String printWord = getStrikeAndBall(printWord);
-        if(printWord != null){
-            System.out.println(printWord);
+    public void printResult(String resultWord) {
+        if (resultWord != null) {
+            System.out.println(resultWord);
         }
     }
 
@@ -49,9 +48,6 @@ public class NumberChecker {
         }
         return ball;
     }
-
-
-
 
 
     private String resultToString(int ball, int strike) {

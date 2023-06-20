@@ -1,12 +1,11 @@
 package baseball;
 
-import camp.nextstep.edu.missionutils.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
-    static final String END_FLAG = "3스트라이크";
+    static final String ANSWER_FLAG = "3스트라이크";
+    static final int RESTART_FLAG = 1;
 
     static List<Integer> answerNumber = new ArrayList<>();
     static InputReader reader = new InputReader();
@@ -17,7 +16,7 @@ public class Application {
             System.out.println("숫자 야구 게임을 시작합니다.");
         }
         answerNumber.clear();
-        answerNumber = new SetAnswerNum().getAnswerNum();
+        answerNumber = new NumberGenerator().getRandomNum();
     }
 
     public static void playGame() {
@@ -29,7 +28,7 @@ public class Application {
             inputNumberList = reader.inputNumberList();
             matchResult = check.getStrikeAndBall(inputNumberList);
             check.printResult(matchResult);
-        } while (matchResult != null && !matchResult.equals(END_FLAG));
+        } while (matchResult != null && !matchResult.equals(ANSWER_FLAG));
 
         if (matchResult == null) {
             isGameEnd = true;
@@ -44,6 +43,6 @@ public class Application {
         do {
             initGame();
             playGame();
-        } while (!isGameEnd && reader.inputEndSignal() != 2);
+        } while (!isGameEnd && reader.inputEndSignal() == RESTART_FLAG);
     }
 }

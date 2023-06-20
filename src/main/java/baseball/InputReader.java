@@ -18,7 +18,7 @@ public class InputReader {
         try {
             checkValidInput(inputNumberList, GAME_NUMBER_DIGIT);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.toString());
             return null;
         }
         return inputNumberList.chars().mapToObj(e -> e - '0').collect(Collectors.toList());
@@ -27,7 +27,12 @@ public class InputReader {
     public int inputEndSignal() {
         System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
         String inputNumber = Console.readLine();
-
+        try{
+                checkValidInput(inputNumber,END_INPUT_DIGIT);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.toString());
+            return -1;
+        }
         return Integer.parseInt(inputNumber);
     }
 
