@@ -3,14 +3,25 @@ package baseball;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class InputReader {
+
+    static final int GAME_NUMBER_DIGIT = 3;
+    static final int END_INPUT_DIGIT = 1;
+
     public List<Integer> inputNumberList() {
         System.out.print("숫자를 입력해주세요. : ");
-        String inputNumber = Console.readLine();
+        String inputNumberList = Console.readLine();
 
-        return inputNumber.chars().mapToObj(e -> e - '0').collect(Collectors.toList());
+        try {
+            checkValidInput(inputNumberList, GAME_NUMBER_DIGIT);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return inputNumberList.chars().mapToObj(e -> e - '0').collect(Collectors.toList());
     }
 
     public int inputEndSignal() {
@@ -18,6 +29,17 @@ public class InputReader {
         String inputNumber = Console.readLine();
 
         return Integer.parseInt(inputNumber);
+    }
+
+    private void checkValidInput(String input, int digit) throws IllegalArgumentException {
+        Set<Character> numberSet = input.chars().
+                mapToObj(e -> (char) e).filter((item) -> {
+                    return '1' <= item && item <= '9';
+                }).collect(Collectors.toSet());
+
+        if (numberSet.size() != digit || input.length() != digit) {
+            throw new IllegalArgumentException();
+        }
     }
 
 
