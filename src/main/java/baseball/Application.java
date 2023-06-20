@@ -10,6 +10,7 @@ public class Application {
 
     static List<Integer> answerNumber = new ArrayList<>();
     static InputReader reader = new InputReader();
+    static boolean isGameEnd = false;
 
     public static void initGame() {
         if (answerNumber.isEmpty()) {
@@ -22,21 +23,27 @@ public class Application {
     public static void playGame() {
         NumberChecker check = new NumberChecker(answerNumber);
 
-        List<Integer> inputNumberList = new ArrayList<>();
+        List<Integer> inputNumberList;
         String matchResult;
         do {
             inputNumberList = reader.inputNumberList();
             matchResult = check.getStrikeAndBall(inputNumberList);
-            System.out.println(matchResult);
-        } while (!matchResult.equals(END_FLAG));
+            check.printResult(matchResult);
+        } while (matchResult != null && !matchResult.equals(END_FLAG));
+
+        if (matchResult == null) {
+            isGameEnd = true;
+            return;
+        }
 
         System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
     }
+
 
     public static void main(String[] args) {
         do {
             initGame();
             playGame();
-        } while (reader.inputEndSignal() != 2);
+        } while (!isGameEnd && reader.inputEndSignal() != 2);
     }
 }
