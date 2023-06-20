@@ -16,7 +16,7 @@ public class Application {
             System.out.println("숫자 야구 게임을 시작합니다.");
         }
         answerNumber.clear();
-        answerNumber = new NumberGenerator().getRandomNum();
+        answerNumber = new NumberGenerator().getRandomNumber();
     }
 
     public static void playGame() {
