@@ -11,12 +11,8 @@ public class Application {
     static InputReader reader = new InputReader();
     static boolean isGameEnd = false;
 
-    public static void initGame() {
-        if (answerNumber.isEmpty()) {
-            System.out.println("숫자 야구 게임을 시작합니다.");
-        }
-        answerNumber.clear();
-        answerNumber = new NumberGenerator().getRandomNumber();
+    public static void resetAnswer() {
+        answerNumber = new NumberGenerator().getRandomNumberList();
     }
 
     public static void playGame() {
@@ -40,8 +36,9 @@ public class Application {
 
 
     public static void main(String[] args) {
+        System.out.println("숫자 야구 게임을 시작합니다.");
         do {
-            initGame();
+            resetAnswer();
             playGame();
         } while (!isGameEnd && reader.inputEndSignal() == RESTART_FLAG);
     }
